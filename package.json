@@ -3,13 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^1.7.2",
+    "chokidar": "^3.6.0",
+    "core-js": "^3.37.1",
+    "html-webpack-plugin": "^5.6.0",
+    "joi": "^17.13.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.1",
+    "react-scripts": "^5.0.1",
+    "rimraf": "^6.0.1",
+    "uuid": "^10.0.0"
+    
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.24.7",
+    "@babel/plugin-transform-async-generator-functions": "^7.24.7",
+    "@babel/plugin-transform-class-properties": "^7.24.7",
+    "@babel/plugin-transform-dynamic-import": "^7.24.7",
+    "@babel/plugin-transform-json-strings": "^7.24.7",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.24.7",
+    "@babel/plugin-transform-numeric-separator": "^7.24.7",
+    "@babel/plugin-transform-object-rest-spread": "^7.24.7",
+    "@babel/plugin-transform-optional-catch-binding": "^7.24.7",
+    "@babel/plugin-transform-optional-chaining": "^7.24.7",
+    "@babel/plugin-transform-unicode-property-regex": "^7.24.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "eslint-webpack-plugin": "^4.2.0",
+    "web-vitals": "^2.1.4",
+    "webpack-dev-middleware": "^7.2.1",
+    "@babel/plugin-proposal-private-property-in-object": "^10.7.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +59,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://127.0.0.1:5000"
 }
