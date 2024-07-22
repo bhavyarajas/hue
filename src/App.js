@@ -81,7 +81,7 @@ function EasyLevel() {
   const [isGridFetched, setIsGridFetched] = useState(false);
   
   const handleCellClick = (index) => {
-    if (gridData.flat()[index] === 0) return; // Don't allow clicking unmovable cells
+    if (gridData.flat()[index] === 0) return;
 
     setSelectedCells(prev => {
       if (prev.includes(index)) {
@@ -104,8 +104,6 @@ function EasyLevel() {
   };
 
   const checkWinCondition = (currentColors) => {
-    // Compare currentColors with the original, unscrambled colors
-    // This is a placeholder - you'll need to implement the actual comparison
     const isWin = currentColors.every((color, index) => color === originalColors[index]);
     setIsWin(isWin);
   };
@@ -121,7 +119,7 @@ function EasyLevel() {
       }
     };
 
-    if (!isGridFetched) { // Only fetch data if it hasn't been fetched yet
+    if (!isGridFetched) {
       fetchData();
     }
   }, [isGridFetched]);
@@ -155,10 +153,79 @@ function EasyLevel() {
 }
 
 function MediumLevel() {
+  const [gridData, setGridData] = useState(null);
+  const [colors, setColors] = useState([]);
+  const [originalColors, setOriginalColors] = useState([]);
+  const [selectedCells, setSelectedCells] = useState([]);
+  const [isWin, setIsWin] = useState(false);
+  const [isGridFetched, setIsGridFetched] = useState(false);
+  
+  const handleCellClick = (index) => {
+    if (gridData.flat()[index] === 0) return;
+
+    setSelectedCells(prev => {
+      if (prev.includes(index)) {
+        return prev.filter(i => i !== index);
+      } else if (prev.length < 2) {
+        return [...prev, index];
+      }
+      return prev;
+    });
+  };
+
+  const swapCells = () => {
+    if (selectedCells.length === 2) {
+      const newColors = [...colors];
+      [newColors[selectedCells[0]], newColors[selectedCells[1]]] = [newColors[selectedCells[1]], newColors[selectedCells[0]]];
+      setColors(newColors);
+      setSelectedCells([]);
+      checkWinCondition(newColors);
+    }
+  };
+
+  const checkWinCondition = (currentColors) => {
+    const isWin = currentColors.every((color, index) => color === originalColors[index]);
+    setIsWin(isWin);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:5000/api/generate_medium_grid');
+        setGridData(response.data.grid);
+        setIsGridFetched(true);
+      } catch (error) {
+        console.error('Error fetching grid data:', error);
+      }
+    };
+
+    if (!isGridFetched) {
+      fetchData();
+    }
+  }, [isGridFetched]);
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Welcome to the medium level page!</h1>
+          <div>
+          {gridData ? (
+            <Grid 
+              gridData={gridData} 
+              colors={colors} 
+              setColors={setColors}
+              setOriginalColors={setOriginalColors}
+              selectedCells={selectedCells}
+              onCellClick={handleCellClick}
+            />
+          ) : (
+            <p>Loading grid...</p>
+          )}
+          </div>
+          {selectedCells.length === 2 && (
+            <button onClick={swapCells}>Swap Cells</button>
+          )}
+          {isWin && <h2>Congratulations! You've won!</h2>}
         <GoMainMenuButton />
       </header>
     </div>
@@ -166,10 +233,79 @@ function MediumLevel() {
 }
 
 function HardLevel() {
+  const [gridData, setGridData] = useState(null);
+  const [colors, setColors] = useState([]);
+  const [originalColors, setOriginalColors] = useState([]);
+  const [selectedCells, setSelectedCells] = useState([]);
+  const [isWin, setIsWin] = useState(false);
+  const [isGridFetched, setIsGridFetched] = useState(false);
+  
+  const handleCellClick = (index) => {
+    if (gridData.flat()[index] === 0) return;
+
+    setSelectedCells(prev => {
+      if (prev.includes(index)) {
+        return prev.filter(i => i !== index);
+      } else if (prev.length < 2) {
+        return [...prev, index];
+      }
+      return prev;
+    });
+  };
+
+  const swapCells = () => {
+    if (selectedCells.length === 2) {
+      const newColors = [...colors];
+      [newColors[selectedCells[0]], newColors[selectedCells[1]]] = [newColors[selectedCells[1]], newColors[selectedCells[0]]];
+      setColors(newColors);
+      setSelectedCells([]);
+      checkWinCondition(newColors);
+    }
+  };
+
+  const checkWinCondition = (currentColors) => {
+    const isWin = currentColors.every((color, index) => color === originalColors[index]);
+    setIsWin(isWin);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:5000/api/generate_hard_grid');
+        setGridData(response.data.grid);
+        setIsGridFetched(true);
+      } catch (error) {
+        console.error('Error fetching grid data:', error);
+      }
+    };
+
+    if (!isGridFetched) {
+      fetchData();
+    }
+  }, [isGridFetched]);
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Welcome to the hard level page!</h1>
+          <div>
+          {gridData ? (
+            <Grid 
+              gridData={gridData} 
+              colors={colors} 
+              setColors={setColors}
+              setOriginalColors={setOriginalColors}
+              selectedCells={selectedCells}
+              onCellClick={handleCellClick}
+            />
+          ) : (
+            <p>Loading grid...</p>
+          )}
+          </div>
+          {selectedCells.length === 2 && (
+            <button onClick={swapCells}>Swap Cells</button>
+          )}
+          {isWin && <h2>Congratulations! You've won!</h2>}
         <GoMainMenuButton />
       </header>
     </div>

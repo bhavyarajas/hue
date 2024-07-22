@@ -16,3 +16,10 @@
 .App-link {
   color: #61dafb;
 }
+
+.homePageButton, .mainMenuButton, .mainMenuLevelsButton {
+  font-weight: bold;
+  font-size: 1em; 
+  padding: 10px 20px;
+  margin: 10px;
+}
