@@ -1,0 +1,12 @@
+frontend/node_modules/
+# Node/Python/OS artifacts
+**/node_modules/
+**/__pycache__/
+**/.DS_Store
+# Git and local config
+.git
+.gitignore
+# Build and cache directories
+frontend/build/
+frontend/dist/
+*.log
