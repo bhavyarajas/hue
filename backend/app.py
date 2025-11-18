@@ -4,8 +4,6 @@ import numpy as np
 from models.vae import VAEModel
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Disable GPU usage
-os.environ["TF_XLA_FLAGS"] = "--xla_gpu=false"
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 app = Flask(__name__)
 CORS(app)  # Allow all origins

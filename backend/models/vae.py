@@ -4,8 +4,6 @@ from tensorflow.keras.models import Model
 import numpy as np
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # Disable GPU usage
-os.environ["TF_XLA_FLAGS"] = "--xla_gpu=false"
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
 class VAEModel:
     def __init__(self, input_shape=(8, 8, 1), latent_dim=4):
