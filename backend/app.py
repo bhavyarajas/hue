@@ -3,6 +3,7 @@ from flask_cors import CORS
 import numpy as np
 from models.vae import VAEModel
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Disable GPU usage
 
 app = Flask(__name__)
 CORS(app)  # Allow all origins
