@@ -1,9 +1,10 @@
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # Disable GPU usage
+
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Dense, Lambda, Flatten, Reshape, Conv2D, Conv2DTranspose
 from tensorflow.keras.models import Model
 import numpy as np
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1" # Disable GPU usage
 
 class VAEModel:
     def __init__(self, input_shape=(8, 8, 1), latent_dim=4):
