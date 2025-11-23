@@ -1,12 +1,18 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from models.vae import VAEModel
+from models.vae_copy import VAEModel
+import os
 
 app = Flask(__name__)
 CORS(app)  # Allow all origins
 
 # Load the trained model
-vae = VAEModel()
+# vae = VAEModel()
+vae = VAEModel(
+    input_shape=(8, 8, 1),
+    latent_dim=8,
+    weights_path="models/pattern_model.npz",
+)
 
 @app.route('/api/generate_easy_grid', methods=['GET'])
 def generate_easy_grid():

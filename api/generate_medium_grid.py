@@ -1,5 +1,5 @@
 import json
-from backend.models.vae import VAEModel
+from backend.models.vae_copy import VAEModel
 
 vae = VAEModel()
 
